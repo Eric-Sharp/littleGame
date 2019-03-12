@@ -1,0 +1,220 @@
+@charset "UTF-8";
+//适配屏幕尺寸
+@charset "UTF-8";
+
+@DeviceList:750px,720px,640px,540px,480px,424px,414px,400px,384px,375px,360px,320px;
+@psdWidth:750px;
+@baseRem:100px;
+@len:length(@DeviceList);
+
+
+
+
+.adapterMixin(@index) when(@index>0){
+  @width:extract(@DeviceList,@index);
+  @media (min-width:@width ){
+    html{
+      font-size:@baseRem / @psdWidth * @width;
+    }
+  }
+  .adapterMixin(@index - 1);
+}
+
+.adapterMixin(@len);
+//重置样式
+
+*,
+*::before,
+*::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+body{
+  font-size: 0.2rem;
+  font-family: "Microsoft YaHei",sans-serif;
+}
+ul,ol{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+  color: #333;
+}
+
+//页面样式
+@gray:#333;
+@red:#922;
+header{
+  border-radius: 0.1rem;
+  background-color: #ddf;
+  padding: 0.1rem;
+  width: 7rem;
+  margin:0.3rem auto  ;
+  font-size: 0.25rem;
+  line-height: 0.4rem;
+  color: #333;
+  span{
+    font-size: 0.2rem;
+    color: #333;
+    //color: #d22;
+  }
+}
+
+section{
+  width: 5rem;
+  margin: 0 auto;
+
+}
+div.operator{
+  margin: 0 auto;
+  width: 5rem;
+  height: 0.5rem;
+
+
+  .prev,.reset{
+    font-size:0.16rem ;
+    float: right;
+    width: 1.4rem;
+    height: 0.5rem;
+    background-color: #aaf;
+    outline: none;
+    margin-right:0.1rem;
+    border-radius: 5px;
+    //border-style: none;
+    //&:hover{
+    //  font-weight:bold;
+    //  color:blue;
+    //}
+
+  }
+
+
+}
+
+#matrix {
+  cursor:pointer;
+  margin: 0.1rem auto;
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+
+  .point, .vac {
+    float: left;
+    margin: 5%;
+    width: 10%;
+    height: 10%;
+
+  }
+  .point {
+    position: relative;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    background-color: @gray;
+    &.linked{
+      background-color: @red
+    }
+    &.unlinked:hover {
+      transform: scale(1.1);
+      background-color:#f44;
+      -webkit-box-shadow: 3px 3px 2px #666;
+      box-shadow: 3px 3px 2px #666;
+    }
+
+    span {
+      display: block;
+      position: absolute;
+      visibility: hidden;
+      &.left, &.right {
+        z-index: 1;
+        background-color: @red;
+        width: 110%;
+        height: 20%;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+      }
+      &.left {
+        left: -60%;
+      }
+
+      &.right {
+        right: -60%;
+      }
+      &.top, &.bottom {
+        z-index: 1;
+        background-color: @red;
+        width: 20%;
+        height: 110%;
+        left: 50%;
+
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+        transform: translateX(-50%);
+      }
+      &.top {
+        top: -60%;
+      }
+      &.bottom {
+        bottom: -60%;
+      }
+
+    }
+    &.left {
+      span.left {
+        visibility: visible
+      }
+    }
+    &.right {
+      span.right {
+        visibility: visible
+      }
+    }
+    &.top {
+      span.top {
+        visibility: visible
+      }
+    }
+    &.bottom {
+      span.bottom {
+        visibility: visible
+      }
+    }
+  }
+}
+h6{
+  margin: 0 auto 1rem auto;
+  a{float: right;
+    color: blue;
+    font-size: 0.2rem;
+    margin-right: 0.1rem;
+
+  }
+}
+
+//答案页面的样式
+.container{
+  width: 6rem;
+  margin: 0.2rem auto;
+  table{
+    text-align: center;
+    margin:0 auto;
+  }
+  p{
+    margin:0.3rem auto ;
+  }
+  a{
+    color: darkblue
+  }
+
+}
+
